@@ -145,7 +145,7 @@ function Plot({
   );
 }
 function App() {
-  const [lab, setLab] = useState("field");
+  const [lab, setLab] = useState("fusion-intro");
   const [preset, setPreset] = useState(0);
   const [q, setQ] = useState<Q>(rational(3, 2)),
     [m, setM] = useState("3"),
@@ -230,13 +230,14 @@ function App() {
         <span>磁场与粒子实验室</span>
         <nav className="lab-nav" aria-label="实验模式">
           {[
-            ["field", "磁力线"],
-            ["directions", "方向入门"],
+            ["fusion-intro", "核聚变入门"],
+            ["tokamak-principle", "托卡马克原理"],
+            ["stellarator-principle", "仿星器原理"],
+            ["stellarator", "两种装置的区别"],
             ["compare", "装置对比"],
-            ["drifts", "漂移机制"],
             ["particles", "粒子轨道"],
-            ["stellarator", "仿星器原理"],
-            ["instabilities", "不稳定性与输运"],
+            ["drifts", "漂移机制"],
+            ["instabilities", "托卡马克中的不稳定性与输运"],
           ].map(([id, label]) => (
             <button
               key={id}
@@ -244,6 +245,7 @@ function App() {
               onClick={() => {
                 setLab(id);
                 setPlaying(false);
+                window.scrollTo({ top: 0, behavior: "instant" });
               }}
             >
               {label}
@@ -666,6 +668,16 @@ function App() {
           <Experiments mode={lab} />
         </Suspense>
       )}
+      <button
+        className="back-to-top"
+        onClick={() => window.scrollTo({
+          top: 0,
+          behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "instant" : "smooth",
+        })}
+        aria-label="回到网页顶部"
+      >
+        ↑ 回到顶部
+      </button>
     </div>
   );
 }

@@ -87,13 +87,14 @@ export default function StellaratorLesson() {
       <div className="lab-heading">
         <div>
           <p className="eyebrow">ROTATIONAL TRANSFORM · ORBIT AVERAGING</p>
-          <h1>仿星器怎样留住漂移的粒子？</h1>
+          <h1>两种装置：都想留住粒子，方法有什么不同？</h1>
           <p>
-            局部漂移仍然存在。关键是绕转后相对磁面的径向漂移是否累积，而非所有上下运动都消失。
+            粒子不是沿一条线永远不偏离。两种装置都让磁场拧着走，帮助粒子往外、往内的偏移在一段运动后相互抵消；区别在于怎样拧出这个磁场，以及怎样优化粒子走过的路线。
           </p>
         </div>
         <button onClick={() => setReset((n) => n + 1)}>复位视角</button>
       </div>
+      <section className="lab-card device-principles"><h2>先用几句话说清楚</h2><p>托卡马克让等离子体中的大电流帮助“拧”磁场；仿星器主要让外部三维线圈完成这件事。两者都想让粒子多绕几圈后留在原来的区域里。</p><p>通行粒子能沿场向前绕；被俘获粒子会在磁场较强的位置掉头，来回弹。托卡马克中常见的香蕉轨道不是仿星器的统一轨道形状；仿星器的三维磁场更复杂，需要优化，让来回弹的粒子不至于每次都朝外偏一点。</p><p>“抵消”指一段运动后向内、向外的偏移尽量相抵，不是每一刻都不漂移。这里两侧使用同一条人为参考漂移，只帮助观察位形与显示倍率；真实粒子轨道并非由这两幅曲面直接算出，数值托卡马克轨道请看第五页。</p></section>
       <div className="stellar-layout">
         <section className="lab-card">
           <h2>① 旋转变换从哪里来</h2>

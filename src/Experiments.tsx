@@ -1,3 +1,5 @@
+import PrinciplePage from "./PrinciplePage";
+import FusionIntro from "./FusionIntro";
 import DirectionLesson from "./DirectionLesson";
 import DevicePrinciples from "./DevicePrinciples";
 import InstabilityLab from "./InstabilityLab";
@@ -199,7 +201,6 @@ function Comparison() {
         仿星器始终显示通用三维扭转示意：R₀、a、场周期数有来源，扭转幅度和截面形状不是实测边界。
         所有装置共用米制坐标。拖动旋转，滚轮缩放；多选时可放大检查。
       </p>
-      <DevicePrinciples />
       <div className="lab-canvas compare-canvas">
         {items.length ? (
           <Canvas
@@ -311,6 +312,7 @@ function Comparison() {
         CAD；“三维形状示意”不能代替真实 VMEC / EFIT
         平衡。装置比较不改变磁力线页的 q。
       </p>
+      <DevicePrinciples />
     </>
   );
 }
@@ -787,7 +789,13 @@ function ParticleLab() {
 export default function Experiments({ mode }: { mode: string }) {
   return (
     <div className="experiments">
-      {mode === "directions" ? (
+      {mode === "fusion-intro" ? (
+        <FusionIntro />
+      ) : mode === "tokamak-principle" ? (
+        <PrinciplePage key="tokamak" />
+      ) : mode === "stellarator-principle" ? (
+        <PrinciplePage key="stellarator" stellar />
+      ) : mode === "directions" ? (
         <DirectionLesson />
       ) : mode === "instabilities" ? (
         <InstabilityLab />

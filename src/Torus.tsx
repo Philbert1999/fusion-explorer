@@ -2,27 +2,35 @@ import { useEffect, useMemo } from "react";
 import { DoubleSide } from "three";
 import { type Geometry } from "./model";
 import { surfaceGeometry } from "./surface";
-import { stellaratorPoint } from "./stellarator";
+import { stellaratorPoint, variedStellaratorPoint } from "./stellarator";
 export default function Torus({
   g,
   color,
   opacity = 0.7,
   periods,
+  varied = false,
 }: {
   g: Geometry;
   color: string;
   opacity?: number;
   periods?: number;
+  varied?: boolean;
 }) {
   const geometry = useMemo(
     () =>
       surfaceGeometry(
         g,
         periods
-          ? (phi, theta) => stellaratorPoint(g, periods, phi, theta)
+          ? (phi, theta) =>
+              (varied ? variedStellaratorPoint : stellaratorPoint)(
+                g,
+                periods,
+                phi,
+                theta,
+              )
           : undefined,
       ),
-    [g.R0, g.a, g.rho, g.kappa, g.delta, periods],
+    [g.R0, g.a, g.rho, g.kappa, g.delta, periods, varied],
   );
   useEffect(() => () => geometry.dispose(), [geometry]);
   return (
