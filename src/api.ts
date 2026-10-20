@@ -17,3 +17,9 @@ export {
 export type { Q, Geometry } from "./model";
 export { presets } from "./presets";
 export type { Preset } from "./presets";
+
+export { orbit, drifts, field } from "./particles";
+export type { OrbitPoint } from "./particles";
+export { devices, deviceBounds } from "./devices";
+export type { Device } from "./devices";
+export { stellaratorPoint, driftProjection } from "./stellarator";

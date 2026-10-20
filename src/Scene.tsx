@@ -1,14 +1,8 @@
+import { surfaceGeometry } from "./surface";
 import { useEffect, useMemo, useRef } from "react";
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import { Line, OrbitControls } from "@react-three/drei";
-import {
-  BufferGeometry,
-  Float32BufferAttribute,
-  DoubleSide,
-  Mesh,
-  MeshPhysicalMaterial,
-  Vector3,
-} from "three";
+import { DoubleSide, Mesh, MeshPhysicalMaterial, Vector3 } from "three";
 import type React from "react";
 import { point, TAU, type Geometry, trace, type Q, hasClosed } from "./model";
 import { theme } from "./theme";
@@ -24,12 +18,12 @@ type Props = {
   view: string;
   reset: number;
 };
-function GrowingLine({
+export function GrowingLine({
   data,
   progress,
   color = theme.line,
 }: {
-  data: ReturnType<typeof trace>;
+  data: { xyz: [number, number, number] }[];
   progress: number;
   color?: string;
 }) {
@@ -44,14 +38,16 @@ function GrowingLine({
   });
   return <Line ref={ref} points={points} color={color} lineWidth={2} />;
 }
-function Camera({
+export function Camera({
   g,
   view,
   reset,
+  distanceScale = 1,
 }: {
   g: Geometry;
   view: string;
   reset: number;
+  distanceScale?: number;
 }) {
   const controls = useRef<React.ComponentRef<typeof OrbitControls>>(null),
     destination = useRef(new Vector3()),
@@ -59,7 +55,8 @@ function Camera({
   const { camera, size } = useThree();
   useEffect(() => {
     const extent = Math.max(g.R0 + g.a, g.kappa * g.a);
-    const d = (extent * 2.8) / Math.min(1, size.width / size.height);
+    const d =
+      (extent * 2.8 * distanceScale) / Math.min(1, size.width / size.height);
     const direction =
       view === "top"
         ? [0, -0.001, 1]
@@ -76,7 +73,7 @@ function Camera({
     camera.far = d * 20;
     camera.updateProjectionMatrix();
     moving.current = true;
-  }, [g, view, reset, size.width, size.height, camera]);
+  }, [g, view, reset, size.width, size.height, camera, distanceScale]);
   useFrame((_, dt) => {
     if (moving.current && controls.current) {
       camera.position.lerp(destination.current, 1 - Math.exp(-7 * dt));
@@ -106,21 +103,7 @@ function Contents(p: Props) {
     [g, q, turns, theta, mode],
   );
   const surface = useMemo(() => {
-    const vertices: number[] = [],
-      indices: number[] = [];
-    for (let i = 0; i <= 128; i++)
-      for (let j = 0; j <= 64; j++)
-        vertices.push(...point(g, (i / 128) * TAU, (j / 64) * TAU));
-    for (let i = 0; i < 128; i++)
-      for (let j = 0; j < 64; j++) {
-        const k = i * 65 + j;
-        indices.push(k, k + 65, k + 1, k + 1, k + 65, k + 66);
-      }
-    const geometry = new BufferGeometry();
-    geometry.setAttribute("position", new Float32BufferAttribute(vertices, 3));
-    geometry.setIndex(indices);
-    geometry.computeVertexNormals();
-    return geometry;
+    return surfaceGeometry(g);
   }, [g]);
   useEffect(() => () => surface.dispose(), [surface]);
   const wires = useMemo(
@@ -242,4 +225,3 @@ export default function Scene(p: Props) {
     </Canvas>
   );
 }
-
