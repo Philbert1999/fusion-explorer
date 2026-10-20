@@ -231,6 +231,10 @@ function App() {
         <nav className="lab-nav" aria-label="实验模式">
           {[
             ["fusion-intro", "核聚变入门"],
+            ["mirror", "磁镜原理"],
+            ["frc", "FRC 原理"],
+            ["pinch", "Z / θ 箍缩"],
+            ["inertial", "惯性聚变原理"],
             ["tokamak-principle", "托卡马克原理"],
             ["stellarator-principle", "仿星器原理"],
             ["stellarator", "两种装置的区别"],

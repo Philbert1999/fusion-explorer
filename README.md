@@ -25,11 +25,15 @@ pnpm build
 
 构建结果位于 `dist/`，可部署到静态网站托管服务。也可使用 npm 安装依赖并执行同名脚本；仓库维护的是 `pnpm-lock.yaml`。
 
-## 八个探索页面
+## 十二个探索页面
 
 | 页面 | 可以观察什么 |
 | --- | --- |
 | 核聚变入门 | 五种反应球模型与方程（含氢硼）、波动能量光、电离滑块、常见等离子体及空气密度对比 |
+| 磁镜原理 | 两端强磁场、反弹与端部漏失；可调磁镜比、出发夹角及漏失锥判据 |
+| FRC 原理 | 核心磁场反向、内部闭合磁力线、外部开放磁力线与零磁场环 |
+| Z / θ 箍缩 | 并排比较轴向/绕柱电流与磁场方向，以及向内压缩 |
+| 惯性聚变原理 | 直接/间接驱动切换，外层烧蚀、燃料压缩、燃烧及膨胀过程 |
 | 托卡马克原理 | 装置构成、可隐藏的环向/极向场线圈及中央螺线管；m/n 入门；可旋转切片与同步 R–Z / 庞加莱点图 |
 | 仿星器原理 | 三维主线圈显隐与透明度、扭转曲面、可选切片及同步截面图；与第一页一致的操作方式 |
 | 两种装置的区别 | 大电流与外部线圈的不同作用，通行/被俘获粒子直觉，位形与人为参考漂移的并排示意 |
@@ -138,4 +142,15 @@ x = R cos φ, y = R sin φ, z = Z
 
 ## 在线发布与后续修改
 
-Sites入口：https://tokamak-explorer.surebell1025.chatgpt.site 。网站与私有GitHub仓库独立，源码继续保存在 Philbert1999/tokamak-explorer；发布后仍可修改。修改后重新运行测试与构建，再发布同一个Sites项目即可更新网址，旧网址不变。托管标识保存在 `.openai/hosting.json`，不含凭据。新站按Sites默认采用仅所有者访问权限。
+Sites入口：https://tokamak-explorer.surebell1025.chatgpt.site 。已按所有者要求开放为公开访问，拿到链接即可浏览。网站与私有GitHub仓库独立，源码继续保存在 Philbert1999/tokamak-explorer；发布后仍可修改。修改后重新运行测试与构建，再发布同一个Sites项目即可更新网址，旧网址不变。托管标识保存在 `.openai/hosting.json`，不含凭据。
+
+## 其他约束思路：三个问题
+
+新增四页均按“靠什么约束燃料、粒子怎么运动、主要难点是什么”展开，并附旋转缩放、复位、暂停、进度与6–60演示秒时长控制。时长增加会延长运动或增加脉冲轮次，不改变播放速度。磁镜粒子轨迹与压缩过程是教学动画；FRC青线是解析示意磁通的闭合等值线，亮点标方向。磁镜使用磁矩近似下的漏失锥条件 sin²α > 1/Rm。
+
+- [LLNL：磁镜原理及漏失锥](https://www.llnl.gov/sites/www/files/2020-06/mftf_etr_nov_86.pdf)
+- [Scientific Reports：FRC磁场拓扑实验](https://pmc.ncbi.nlm.nih.gov/articles/PMC5814458/)
+- [UT Austin：Z/θ线性箍缩](https://farside.ph.utexas.edu/teaching/plasma1/Fusionhtml/node11.html)
+- [LLNL：惯性约束，直接/间接驱动](https://heds-center.llnl.gov/research/research-areas/inertial-confinement-fusion)
+
+截图：磁镜、FRC、箍缩、惯性聚变分别保存在 screenshots 下的 mirror-principle.jpg、frc-principle.jpg、pinch-principle.jpg、inertial-principle.jpg。

@@ -1,5 +1,6 @@
 import PrinciplePage from "./PrinciplePage";
 import FusionIntro from "./FusionIntro";
+import ConfinementLesson from "./ConfinementLesson";
 import DirectionLesson from "./DirectionLesson";
 import DevicePrinciples from "./DevicePrinciples";
 import InstabilityLab from "./InstabilityLab";
@@ -791,6 +792,8 @@ export default function Experiments({ mode }: { mode: string }) {
     <div className="experiments">
       {mode === "fusion-intro" ? (
         <FusionIntro />
+      ) : mode === "mirror" || mode === "frc" || mode === "pinch" || mode === "inertial" ? (
+        <ConfinementLesson key={mode} kind={mode} />
       ) : mode === "tokamak-principle" ? (
         <PrinciplePage key="tokamak" />
       ) : mode === "stellarator-principle" ? (
