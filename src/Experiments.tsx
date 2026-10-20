@@ -11,6 +11,7 @@ import { useEffect, useMemo, useState } from "react";
 import { Canvas, useThree } from "@react-three/fiber";
 import { Line, OrbitControls } from "@react-three/drei";
 import { devices, deviceBounds } from "./devices";
+import { deviceFactsChecked, formatDevicePower } from "./deviceFacts";
 import Torus from "./Torus";
 import StellaratorLesson from "./StellaratorLesson";
 import { type Geometry, point, TAU } from "./model";
@@ -106,6 +107,7 @@ function ComparisonCamera({
   return <OrbitControls makeDefault />;
 }
 function Comparison() {
+  const [hovered, setHovered] = useState<string | null>(null);
   const typical = ["EAST", "ITER", "Wendelstein 7-X", "LHD"];
   const [selected, setSelected] = useState(typical),
     [reset, setReset] = useState(0),
@@ -134,7 +136,7 @@ function Comparison() {
       <div className="lab-heading">
         <div>
           <p className="eyebrow">TOKAMAKS & STELLARATORS · SAME SCALE</p>
-          <h1>磁约束装置，同一把尺子</h1>
+          <h1>装置尺寸对比 · 同一把尺子</h1>
           <p>
             {devices.length} 台公开参考：
             {devices.filter((p) => p.family === "tokamak").length} 台托卡马克、
@@ -219,7 +221,12 @@ function Comparison() {
             />
             <group>
               {items.map(({ p, x, index }) => (
-                <group key={p.name} position={[x - centre, 0, 0]}>
+                <group
+                  key={p.name}
+                  position={[x - centre, 0, 0]}
+                  onPointerOver={event => { event.stopPropagation(); setHovered(p.name); }}
+                  onPointerOut={() => setHovered(null)}
+                >
                   <Torus
                     g={{ ...p.geometry, rho: 1 }}
                     color={color(index)}
@@ -233,6 +240,7 @@ function Comparison() {
         ) : (
           <p className="empty-lab">请至少选择一个装置</p>
         )}
+        {hovered && selected.includes(hovered) && <div className="device-hover-name" role="status">{hovered}</div>}
         <div className="comparison-legend">
           {items.map(({ p, index }) => (
             <span key={p.name} style={{ color: color(index) }}>
@@ -242,8 +250,9 @@ function Comparison() {
           ))}
         </div>
       </div>
-      <details className="lab-card device-sources">
-        <summary>参数、适用工况与来源 · {items.length} 台（展开）</summary>
+      <details open className="lab-card device-sources">
+        <summary>参数、适用工况与来源 · {items.length} 台</summary>
+        <p className="device-power-note">时间与功率资料核查：{deviceFactsChecked}。每项注明加热、聚变输出或电源功率，以及设计 / 系统能力 / 示例放电；不是净发电功率。建造与运行阶段分开列出，运行期间包含停机升级。</p>
         <div className="table-scroll">
           <table className="device-table">
             <thead>
@@ -251,6 +260,8 @@ function Comparison() {
                 {[
                   "装置 / 地区",
                   "类型",
+                  "建造 / 使用时间",
+                  "功率 · 类型与工况",
                   "R₀ / m",
                   "a / m",
                   "κ / δ",
@@ -272,6 +283,19 @@ function Comparison() {
                     {p.family === "stellarator"
                       ? "仿星器/螺旋装置"
                       : "托卡马克"}
+                  </td>
+                  <td className="device-history">
+                    <strong>{p.facts.operation}</strong>
+                    {p.facts.construction && <small>{p.facts.construction}</small>}
+                    <a href={p.facts.historySource} target="_blank" rel="noreferrer">时间资料 ↗</a>
+                  </td>
+                  <td className="device-power">
+                    {p.facts.power.map(power => <div key={power.label}>
+                      <strong>{formatDevicePower(power.mw)}</strong>
+                      <span>{power.label}</span>
+                      <small>{power.detail}</small>
+                      <a href={power.source} target="_blank" rel="noreferrer">功率资料 ↗</a>
+                    </div>)}
                   </td>
                   <td>{p.geometry.R0}</td>
                   <td>{p.geometry.a}</td>

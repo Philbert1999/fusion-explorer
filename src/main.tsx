@@ -224,9 +224,10 @@ function App() {
   return (
     <div className="app">
       <header>
-        <strong>
-          FUSION <span>EXPLORER · 核聚变探索者</span>
-        </strong>
+        <div className="brand">
+          <strong>FUSION <span>EXPLORER · 核聚变探索者</span></strong>
+          <small className="brand-author">Vibe-coded by Chang Huayi with Codex</small>
+        </div>
         <span>核聚变与等离子体交互实验室</span>
         <nav className="lab-nav" aria-label="实验模式">
           {[
@@ -238,7 +239,7 @@ function App() {
             ["tokamak-principle", "托卡马克原理"],
             ["stellarator-principle", "仿星器原理"],
             ["stellarator", "两种装置的区别"],
-            ["compare", "装置对比"],
+            ["compare", "装置尺寸对比"],
             ["particles", "粒子轨道"],
             ["drifts", "漂移机制"],
             ["instabilities", "托卡马克中的不稳定性与输运"],

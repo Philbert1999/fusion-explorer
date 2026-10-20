@@ -2,7 +2,28 @@ import { describe, it, expect } from "vitest";
 import { devices, deviceBounds } from "./devices";
 import { validateGeometry, TAU } from "./model";
 import { stellaratorPoint, driftProjection } from "./stellarator";
+import { deviceFacts, formatDevicePower } from "./deviceFacts";
 describe("device directory and stellarator teaching model", () => {
+  it("covers every device with sourced operating dates and identified power", () => {
+    expect(Object.keys(deviceFacts).sort()).toEqual(devices.map(d => d.name).sort());
+    for (const d of devices) {
+      expect(d.facts.operation).toMatch(/\d{4}|尚未投运|建设/);
+      expect(new URL(d.facts.historySource).protocol).toBe("https:");
+      expect(d.facts.power.length).toBeGreaterThan(0);
+      for (const power of d.facts.power) {
+        expect(Number.isFinite(power.mw) && power.mw > 0).toBe(true);
+        expect(power.label.length).toBeGreaterThan(3);
+        expect(power.detail.length).toBeGreaterThan(5);
+        expect(new URL(power.source).protocol).toBe("https:");
+      }
+    }
+    expect(deviceFacts.LHD.operation).toContain("2025-12-25");
+    expect(deviceFacts.ITER.operation).toContain("尚未投运");
+    expect(deviceFacts.ITER.power.every(p => p.label.includes("设计目标"))).toBe(true);
+    expect(formatDevicePower(500)).toBe("500 MW");
+    expect(formatDevicePower(0.0466)).toBe("46.6 kW");
+    expect(formatDevicePower(0.006)).toBe("6 kW");
+  });
   it("has unique sourced devices and six stellarators", () => {
     expect(new Set(devices.map((d) => d.name)).size).toBe(devices.length);
     expect(devices.filter((d) => d.family === "stellarator")).toHaveLength(6);

@@ -1,8 +1,10 @@
 import { presets, type Preset } from "./presets";
+import { deviceFacts, type DeviceFacts } from "./deviceFacts";
 export type Device = Preset & {
   family: "tokamak" | "stellarator";
   periods?: number;
   periodSource?: string;
+  facts: DeviceFacts;
 };
 type Entry = {
   name: string;
@@ -261,7 +263,7 @@ export const devices: Device[] = [
     note:
       p.note + " κ、δ 不适用于统一描述其三维边界；通用扭转幅度不是实测参数。",
   })),
-];
+].map(device => ({ ...device, facts: deviceFacts[device.name] }));
 export function deviceBounds(device: Device, illustrative: boolean) {
   const reach =
     device.family === "stellarator" && illustrative ? Math.sqrt(1.7) + 0.12 : 1;

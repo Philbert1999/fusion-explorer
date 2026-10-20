@@ -1,5 +1,7 @@
 # 核聚变探索者 · Fusion Explorer
 
+Vibe-coded by Chang Huayi with Codex
+
 从原子核相遇开始，在浏览器中探索核聚变和等离子体：磁镜、FRC、Z/θ箍缩、惯性约束聚变、托卡马克与仿星器，以及磁力线、粒子轨道、漂移、不稳定性和输运。面向初学者的交互式三维教学工作台。
 
 **[在线体验核聚变探索者](https://tokamak-explorer.surebell1025.chatgpt.site)** · 公开访问，链接可直接分享。
@@ -41,7 +43,7 @@ pnpm build
 | 托卡马克原理 | 装置构成、可隐藏的环向/极向场线圈及中央螺线管；m/n 入门；可旋转切片与同步 R–Z / 庞加莱点图 |
 | 仿星器原理 | 三维主线圈显隐与透明度、扭转曲面、可选切片及同步截面图；与第一页一致的操作方式 |
 | 两种装置的区别 | 大电流与外部线圈的不同作用，通行/被俘获粒子直觉，位形与人为参考漂移的并排示意 |
-| 装置对比 | 同一米制比例下比较 28 台装置，搜索、筛选、参数来源及底部原理说明 |
+| 装置尺寸对比 | 同一米制比例下比较28台装置；悬停三维模型显示名称，默认展开建造/使用时间、功率及来源 |
 | 粒子轨道 | 数值导引中心积分生成通行/香蕉轨道，同步 R–Z、平行速度与守恒误差 |
 | 漂移机制 | ∇B、曲率及 E×B 漂移，场方向、真实位移与可旋转空间示意 |
 | 托卡马克中的不稳定性与输运 | 宏观/微观例子、分类、简要原理及外部推导链接 |
@@ -98,6 +100,7 @@ x = R cos φ, y = R sin φ, z = Z
 | `src/api.ts` | 现有数学、装置数据与粒子模型的公共入口 |
 | `src/model.ts`、`src/surface.ts` | 磁力线与参数化磁面几何 |
 | `src/presets.ts`、`src/devices.ts` | 几何预设、装置目录及来源元数据 |
+| `src/deviceFacts.ts` | 28台装置的建造/运行时间、分类型功率、工况及公开来源 |
 | `src/particles.ts`、`src/stellarator.ts` | 导引中心、漂移与仿星器教学模型 |
 | `src/instability.ts`、`src/microinstability.ts`、`src/extraInstabilities.ts` | 教学形变、波纹与弛豫周期 |
 | `src/Scene.tsx`、`src/Torus.tsx` | 三维场景与共享曲面 |
@@ -158,3 +161,11 @@ Sites入口：https://tokamak-explorer.surebell1025.chatgpt.site 。已按所有
 - [LLNL：惯性约束，直接/间接驱动](https://heds-center.llnl.gov/research/research-areas/inertial-confinement-fusion)
 
 截图：磁镜、FRC、箍缩、惯性聚变分别保存在 screenshots 下的 mirror-principle.jpg、frc-principle.jpg、pinch-principle.jpg、inertial-principle.jpg。
+
+## 装置尺寸、时间与功率
+
+三维模型沿用同一米制尺度；指针放在模型表面即显示装置名称。下方“参数、适用工况与来源”默认展开，每台装置列出可查的建造阶段、首等离子体/运行区间，以及独立的时间与功率来源。数据于2026-10-20核查：例如EAST于2000开建、2005完成组装、2006起实验运行；LHD于2025-12-25结束实验。
+
+功率按资料口径标明加热子系统、加热总能力、聚变输出或电源额定值；同时标注设计目标、历史配置或示例放电。MW与kW自动换算。ITER的50 MW输入和500 MW目标聚变输出分别列出；J-TEXT的100 MW是脉冲发电机额定值；GOLEM的46.6 kW取自示例放电#2819。各条来源保存在src/deviceFacts.ts，避免将不同量都写成笼统的“功率”。
+
+全站十二页左上角统一显示作者署名：Vibe-coded by Chang Huayi with Codex。
