@@ -4,9 +4,9 @@ Vibe-coded by Chang Huayi with Codex
 
 从原子核相遇开始，在浏览器中探索核聚变和等离子体：磁镜、FRC、Z/θ箍缩、惯性约束聚变、托卡马克与仿星器，以及磁力线、粒子轨道、漂移、不稳定性和输运。面向初学者的交互式三维教学工作台。
 
-**[在线体验核聚变探索者](https://tokamak-explorer.surebell1025.chatgpt.site)** · 公开访问，链接可直接分享。
+**[在线体验核聚变探索者](https://fusion-explorer.surebell1025.chatgpt.site)** · 公开访问，链接可直接分享。
 
-项目原名 Tokamak Explorer，现已扩展为涵盖多种聚变路线的 Fusion Explorer。现有仓库地址与分享网址继续有效。
+项目原名 Tokamak Explorer，现已扩展为涵盖多种聚变路线的 Fusion Explorer。公开网页地址已改为 fusion-explorer。
 
 使用 React、TypeScript、Vite、Three.js、React Three Fiber、Drei、Tailwind CSS 和 Vitest。所有计算在本地浏览器运行，无需后端或付费 API。
 
@@ -149,7 +149,7 @@ x = R cos φ, y = R sin φ, z = Z
 
 ## 在线发布与后续修改
 
-Sites入口：https://tokamak-explorer.surebell1025.chatgpt.site 。已按所有者要求开放为公开访问，拿到链接即可浏览。网站与私有GitHub仓库独立，源码继续保存在 Philbert1999/tokamak-explorer；发布后仍可修改。修改后重新运行测试与构建，再发布同一个Sites项目即可更新网址，旧网址不变。托管标识保存在 `.openai/hosting.json`，不含凭据。
+Sites入口：https://fusion-explorer.surebell1025.chatgpt.site 。已按所有者要求开放为公开访问，拿到链接即可浏览。网站与私有GitHub仓库独立，源码继续保存在 Philbert1999/tokamak-explorer；发布后仍可修改。修改后重新运行测试与构建，再发布同一个Sites项目即可更新内容。托管标识保存在 `.openai/hosting.json`，不含凭据。香港镜像计划使用阿里云OSS中国香港地域及核聚变相关自定义域名，尚未开通。
 
 ## 其他约束思路：三个问题
 
