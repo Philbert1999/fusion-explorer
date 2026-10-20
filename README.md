@@ -1,10 +1,14 @@
-# Tokamak Explorer
+# 核聚变探索者 · Fusion Explorer
 
-在浏览器中了解核聚变和等离子体，探索托卡马克磁力线、粒子轨道、漂移、不稳定性与输运的交互式教学工作台。
+从原子核相遇开始，在浏览器中探索核聚变和等离子体：磁镜、FRC、Z/θ箍缩、惯性约束聚变、托卡马克与仿星器，以及磁力线、粒子轨道、漂移、不稳定性和输运。面向初学者的交互式三维教学工作台。
+
+**[在线体验核聚变探索者](https://tokamak-explorer.surebell1025.chatgpt.site)** · 公开访问，链接可直接分享。
+
+项目原名 Tokamak Explorer，现已扩展为涵盖多种聚变路线的 Fusion Explorer。现有仓库地址与分享网址继续有效。
 
 使用 React、TypeScript、Vite、Three.js、React Three Fiber、Drei、Tailwind CSS 和 Vitest。所有计算在本地浏览器运行，无需后端或付费 API。
 
-![核聚变入门](screenshots/fusion-intro.jpg)
+![核聚变探索者网页预览](screenshots/fusion-explorer.jpg)
 
 ## 本地运行
 

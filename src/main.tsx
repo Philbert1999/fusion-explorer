@@ -225,9 +225,9 @@ function App() {
     <div className="app">
       <header>
         <strong>
-          TOKAMAK <span>EXPLORER</span>
+          FUSION <span>EXPLORER · 核聚变探索者</span>
         </strong>
-        <span>磁场与粒子实验室</span>
+        <span>核聚变与等离子体交互实验室</span>
         <nav className="lab-nav" aria-label="实验模式">
           {[
             ["fusion-intro", "核聚变入门"],
