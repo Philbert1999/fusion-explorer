@@ -243,6 +243,7 @@ function App() {
             ["particles", "粒子轨道"],
             ["drifts", "漂移机制"],
             ["instabilities", "托卡马克中的不稳定性与输运"],
+            ["advanced", "进阶探索"],
           ].map(([id, label]) => (
             <button
               key={id}

@@ -218,3 +218,42 @@ npm run build
 项目统一更名为核聚变探索者 · Fusion Explorer；更新网页页头、浏览器标题与描述、npm包名、README和托管显示名称。继续使用既有仓库和公开分享地址。
 
 装置对比更名“装置尺寸对比”；三维模型支持指针悬停显示名称，参数/适用工况默认展开。为全部28台装置新增独立时间与功率资料，逐项附来源和工况，区分加热、聚变输出与电源额定值。更新LHD结束时间。十二页共用页头加入作者署名Vibe-coded by Chang Huayi with Codex。
+
+## 进阶探索：电场与电流（2026-10-23）
+
+最后一个标签新增“进阶探索 · 电场与电流”。三维环面区分电场 E、传统电流 J、电子平均定向运动和磁场 B，显示中央螺线管及其电流方向。环向感应电场模式使用 V_loop = −dΦ/dt、Eφ = V_loop/(2πR)、固定 σ∥ = 10⁶ S/m 的局部欧姆响应；径向电场模式展示电子和离子同向的 E×B 漂移，以及共同流动与净电流的区别。可反转磁通变化、径向 E 或环向 B，切换图层、视角，暂停、重播、定位及延长6–60演示秒。不是电流反转瞬态或自洽平衡计算。
+
+模型和方向测试位于 src/electric.ts 与 src/electric.test.ts，页面位于 src/ElectricLesson.tsx。进一步阅读：[ITER 中央螺线管](https://www.iter.org/fusion-glossary)、[UT Austin 电流与输运方程](https://farside.ph.utexas.edu/teaching/plasma/Plasma/node53.html)。
+## 进阶探索：一次放电与合成诊断（2026-10-23）
+
+末尾“进阶探索”现在有三个内部栏目：一次放电、诊断与合成诊断、电场与电流。
+
+- 一次放电：六阶段可跳转时间轴，三维等离子体与电流、中心密度、中心温度、辅助加热、热储能五条波形同步。每24示意秒一轮，延长至96秒会增加放电轮数和测量数据。
+- 诊断：三维干涉仪和R–Z密度图共用同一放电；移动观测弦，调节剖面尖锐度、有限束宽、采样间隔与噪声。对比同观测过程的合成视线积分和带噪离散信号，显示单位10²⁰ m⁻²，区别于局部密度10²⁰ m⁻³。
+- 多弦恢复：七条弦通过规定函数族拟合中心密度和尖锐度；真值与拟合在同一最近采样时刻比较。单弦明确不做唯一剖面恢复。数值积分与已知抛物线解析值、多弦无噪恢复、采样区间扩展均有测试。
+
+数据为教学规定波形，不是装置实测或自洽放电求解；复现输入与模型见src/experiment.ts，三维页面见src/AdvancedLesson.tsx。此轮尚未实现独立的加热系统、磁平衡、偏滤器模块。参考：[ITER诊断](https://www.iter.org/machine/supporting-systems/diagnostics)、[IPP干涉仪实验讲义](https://www.ipp.mpg.de/2882460/anleitung.pdf)。
+
+本轮65项测试、TypeScript检查通过；本地构建与上传包随代码更新，浏览器视觉检查及线上发布状态另行确认。
+## 进阶探索六栏目与入口修复（2026-10-23）
+
+进阶探索新增三个以三维动态场景为主、旁配原理说明的栏目：
+
+- 加热与电流驱动：欧姆、NBI、EC、IC传能示意；中性原子直行、电离后的快离子偏转、波与回旋吸收，及对称加热/正反向电流驱动。简化能量模型满足 dW/dt=P_abs−W/τ，不把教学驱动系数作为装置效率预测。
+- 磁平衡与剖面：嵌套磁面、沿线亮点、可调κ/δ与选定半径；电流集中程度联动圆柱近似q剖面；显示压强、电流和q曲线及q=1.5/2/3参考位置。
+- 刮削层与偏滤器：带X点的解析磁通、闭合分界面、开放螺旋场线及内外靶板，热流标记沿线运动。可调SOL功率、辐射分流、足迹展宽及演化时长，统计靶板功率、平均热流与累计能量。
+
+三栏目均支持旋转、缩放、平移、视角复位、播放/暂停、重播、进度及6–96示意秒的演化时长。
+
+修复已在浏览器捕获的 Invalid shot：首帧RAF时间戳可能略早于performance.now()起点，原逻辑产生负时间。frameElapsed统一限制非负帧间隔，覆盖进阶放电、电场、电流、粒子轨道与新场景。另将独立DOM根的三维标注改为同一WebGL场景内的标注，解决切换时removeChild卸载竞争。
+
+新增模型：src/advancedPhysics.ts；页面：src/PhysicsLab.tsx；标注：src/SceneLabel.tsx。进一步阅读：[ITER加热系统](https://www.iter.org/machine/supporting-systems/external-heating-systems)、[IPP磁平衡](https://www.ipp.mpg.de/4119345/mhd)、[ITER偏滤器与分界面术语](https://www.iter.org/fusion-glossary)。
+
+验证：71项Vitest测试通过，TypeScript检查与生产构建通过。独立Chrome实际打开本地5174，测试四次进入进阶页、六栏目切换、四种加热方式、对称加热无定向驱动、延长演化时间和剖面/SOL参数调节；注入提前50ms的RAF时间戳回归首帧问题，无未捕获页面异常。保留1920×1080截图：screenshots/advanced-heating.png、advanced-equilibrium.png、advanced-divertor.png。
+
+本轮提供本地预览与艾可秀兼容上传包，未更新GitHub或公开网站，尚未验证手机实机与艾可秀新上传后的运行效果。
+### 2026-10-23 · 偏滤器实体展示
+
+将内外靶板改为有厚度的银灰色分块瓦片，增加深蓝承载结构与橙色热流足迹，补充实体图例和说明。新增整体/偏滤器近景切换，切换视角保持播放进度。
+
+TypeScript检查、生产构建及本地5174独立浏览器检查通过；验证两种视角、切换后进度保持、无页面异常。保留1920×1080截图：screenshots/divertor-hardware-overview.png、screenshots/divertor-hardware-closeup.png。已更新fusion-explorer-advanced.zip，尚未同步GitHub或线上网站。

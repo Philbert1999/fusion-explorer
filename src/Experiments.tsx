@@ -1,3 +1,4 @@
+import AdvancedLesson from "./AdvancedLesson";
 import PrinciplePage from "./PrinciplePage";
 import FusionIntro from "./FusionIntro";
 import ConfinementLesson from "./ConfinementLesson";
@@ -5,7 +6,7 @@ import DirectionLesson from "./DirectionLesson";
 import DevicePrinciples from "./DevicePrinciples";
 import InstabilityLab from "./InstabilityLab";
 import PlaybackDuration from "./PlaybackDuration";
-import { advanceProgress } from "./playback";
+import { advanceProgress, frameElapsed } from "./playback";
 import DriftView from "./DriftView";
 import { useEffect, useMemo, useState } from "react";
 import { Canvas, useThree } from "@react-three/fiber";
@@ -520,7 +521,7 @@ function ParticleLab() {
     let id = 0,
       last = performance.now();
     const tick = (now: number) => {
-      const dt = (now - last) / 1000;
+      const dt = frameElapsed(now, last);
       last = now;
       setProgress((p) => advanceProgress(p, dt, duration / 30));
       id = requestAnimationFrame(tick);
@@ -814,7 +815,7 @@ function ParticleLab() {
 export default function Experiments({ mode }: { mode: string }) {
   return (
     <div className="experiments">
-      {mode === "fusion-intro" ? (
+      {mode === "advanced" ? (<AdvancedLesson />) : mode === "fusion-intro" ? (
         <FusionIntro />
       ) : mode === "mirror" || mode === "frc" || mode === "pinch" || mode === "inertial" ? (
         <ConfinementLesson key={mode} kind={mode} />

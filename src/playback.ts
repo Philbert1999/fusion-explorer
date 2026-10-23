@@ -15,3 +15,9 @@ export function advanceProgress(
   const next = progress + elapsedSeconds / durationSeconds;
   return loop ? next % 1 : Math.min(1, next);
 }
+
+// The first RAF timestamp may precede performance.now() captured during setup.
+export function frameElapsed(now: number, previous: number) {
+  if (![now, previous].every(Number.isFinite)) throw new Error('Invalid animation timestamp');
+  return Math.max(0, Math.min(.1, (now - previous) / 1000));
+}

@@ -73,6 +73,14 @@ export default function FusionIntro() {
   const finished = seconds >= duration;
   const shown = f.fused ? r.products : r.reactants;
   const distance = f.fused ? 0.45 + 3.1 * f.release : 2.9 - 2.45 * f.approach;
+  const jumpTo = (id: string) => {
+    const target = document.getElementById(id);
+    if (!target) return;
+    const headerHeight = document.querySelector('header')?.getBoundingClientRect().height ?? 0;
+    window.scrollTo({top: window.scrollY + target.getBoundingClientRect().top - headerHeight - 20,
+      behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth'});
+    target.focus({preventScroll: true});
+  };
   return (
     <div className="fusion-intro">
       <div className="lab-heading">
@@ -84,6 +92,14 @@ export default function FusionIntro() {
           </p>
         </div>
       </div>
+      <nav className="intro-contents" aria-label="核聚变入门本页内容">
+        <div><strong>小球演示只是开始</strong><span>向下滚动，还有三个互动内容；也可以直接点击跳转。</span></div>
+        <div className="intro-contents-links">
+          <button onClick={() => jumpTo('intro-plasma')}>等离子体是什么 <span aria-hidden="true">↓</span></button>
+          <button onClick={() => jumpTo('intro-states')}>物态温度与密度图 <span aria-hidden="true">↓</span></button>
+          <button onClick={() => jumpTo('intro-density')}>燃料到底有多稀薄 <span aria-hidden="true">↓</span></button>
+        </div>
+      </nav>
       <div className="fusion-layout">
         <section className="lab-card fusion-stage-card">
           <div className="fusion-choices" aria-label="选择核聚变反应">
@@ -215,6 +231,7 @@ export default function FusionIntro() {
               {seconds.toFixed(1)} / {duration} s
             </output>
           </div>
+          <button className="intro-continue" onClick={() => jumpTo('intro-plasma')}>继续了解：等离子体是什么？ ↓</button>
           <label className="fusion-duration">
             演示时长
             <input
@@ -270,7 +287,7 @@ export default function FusionIntro() {
           </section>
         </aside>
       </div>
-      <section className="lab-card plasma-basics">
+      <section id="intro-plasma" tabIndex={-1} className="lab-card plasma-basics">
         <div className="plasma-description">
           <p className="eyebrow">03 · 先认识聚变燃料的状态</p>
           <h2>等离子体：物质的第四态</h2>
@@ -343,8 +360,8 @@ export default function FusionIntro() {
           </p>
         </div>
       </section>
-      <MatterMap fuelMass={d.plasmaMass} />
-      <section className="lab-card plasma-density">
+      <div id="intro-states" tabIndex={-1}><MatterMap fuelMass={d.plasmaMass} /></div>
+      <section id="intro-density" tabIndex={-1} className="lab-card plasma-density">
         <p className="eyebrow">05 · 把稀薄程度画给你看</p>
         <h2>比空气稀薄得多的高温燃料</h2>
         <p>

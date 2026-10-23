@@ -1405,3 +1405,75 @@ label.playback-duration input[type="range"] {
 .device-power-note {color:var(--muted);font-size:13px;line-height:1.8;max-width:1100px;}
 .device-table td {vertical-align:top;}
 @media(max-width:760px) {.brand-author {font-size:11px;}.device-hover-name {font-size:17px;}}
+.electric-canvas {min-height:480px;}
+.electric-control {display:grid;gap:12px;font-size:16px;}
+.electric-control p,.electric-caption {font-size:14px;line-height:1.7;color:var(--muted);margin:0;}
+.electric-layers {display:grid;grid-template-columns:1fr 1fr;gap:13px;margin-top:22px;font-size:14px;}
+.electric-layers label {display:flex;align-items:center;gap:8px;}
+.electric-explain {display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px;margin-top:22px;}
+.electric-explain .lab-card {padding:24px;}
+.electric-explain p {line-height:1.85;}
+@media(max-width:1100px){.electric-layout,.electric-explain {grid-template-columns:1fr;}.electric-canvas {min-height:400px;}}.intro-contents {display:flex;align-items:center;justify-content:space-between;gap:18px;flex-wrap:wrap;margin:0 0 20px;padding:17px 22px;border:1px solid #416579;border-radius:10px;background:linear-gradient(110deg,#152b3a,#172235);}
+.intro-contents strong {display:block;color:#e0f0f5;font-size:18px;font-weight:550;}
+.intro-contents>div>span {display:block;color:#b2c9d7;font-size:14px;margin-top:5px;}
+.intro-contents-links {display:flex;flex-wrap:wrap;gap:10px;}
+.intro-contents-links button {font-size:15px;padding:11px 15px;border-color:#52788b;background:#1e3949;color:#bcecf0;}
+.intro-contents-links button span {margin-left:8px;}
+.intro-contents-links button:hover,.intro-continue:hover {background:#2c4d5e;border-color:#8bc7d5;}
+.intro-continue {width:100%;padding:12px 16px;font-size:16px;color:#bcecf0;border:1px solid #52788b;background:#1e3949;}
+@media(max-width:700px){.intro-contents {padding:16px;}.intro-contents-links {width:100%;}.intro-contents-links button {width:100%;text-align:left;}}.advanced-tabs {display:flex;flex-wrap:wrap;gap:12px;margin:0 0 24px;}
+.advanced-tabs button {padding:13px 22px;font-size:17px;}
+.advanced-tabs button.active {border-color:#7ac8d5;background:#203d4e;color:#c7f0f1;}
+.advanced-stage {display:flex;justify-content:space-between;gap:15px;flex-wrap:wrap;background:linear-gradient(105deg,#213c4d,#1c243b);border:1px solid #416175;padding:18px 24px;border-radius:10px;margin-bottom:20px;}
+.advanced-stage strong {font-size:21px;color:#c8e9ed;font-weight:500;}
+.advanced-stage span {color:#b7c7db;font-variant-numeric:tabular-nums;}
+.advanced-layout .lab-card {min-width:0;}
+.advanced-layout .confinement-toolbar h2 {font-size:20px;}
+.advanced-phases {display:grid;gap:9px;}
+.advanced-phases button {display:flex;align-items:center;gap:16px;text-align:left;padding:12px;font-size:16px;}
+.advanced-phases small {color:#82bfd1;}
+.advanced-waveforms {display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;margin-top:22px;}
+.advanced-waveforms .lab-card,.advanced-diagnostic-grid .lab-card {padding:22px;min-width:0;}
+.advanced-metric {display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;}
+.advanced-metric h2 {font-size:17px;}
+.advanced-metric strong {font-size:24px;font-weight:500;}
+.advanced-metric small {font-size:13px;}
+.advanced-chart {width:100%;height:auto;display:block;margin-top:12px;}
+.advanced-chart text {fill:#a8bdcf;font-size:12px;}
+.advanced-slider {display:grid;gap:8px;font-size:14px;margin:0 0 19px;}
+.advanced-slider input {width:100%;}
+.advanced-diagnostic-grid {display:grid;grid-template-columns:1fr 1.3fr;gap:20px;margin-top:22px;}
+.advanced-cross {display:block;width:100%;max-height:340px;cursor:crosshair;}
+.advanced-legend {display:flex;gap:20px;flex-wrap:wrap;font-size:14px;margin:12px 0;}
+.advanced-takeaway {border-left:2px solid #f4bb85;padding-left:15px;color:#e1d8c8;}
+.advanced-reconstruction {display:grid;grid-template-columns:1.3fr 1fr;gap:25px;padding:25px;margin-top:20px;align-items:center;}
+.advanced-profile {width:100%;height:auto;}
+.advanced-reading {padding:24px;margin-top:22px;}
+.advanced-reading p,.advanced-reconstruction p {line-height:1.85;}
+@media(max-width:1200px){.advanced-waveforms {grid-template-columns:1fr 1fr;}}
+@media(max-width:900px){.advanced-layout,.advanced-diagnostic-grid,.advanced-reconstruction,.advanced-waveforms {grid-template-columns:1fr;}.advanced-tabs button {flex:1;padding:12px;}}.physics-heading {margin:6px 0 22px;}
+.physics-heading h2 {font-size:28px;font-weight:500;margin-bottom:10px;}
+.physics-heading p {color:#b1c6d8;font-size:16px;line-height:1.8;}
+.physics-canvas {height:560px;min-height:480px;}
+.physics-options {display:flex;gap:8px;flex-wrap:wrap;margin-bottom:20px;}
+.physics-options button {padding:9px 11px;font-size:14px;}
+.physics-options button.active {background:#23485b;color:#c5f0ee;border-color:#7ab9c7;}
+.physics-summary,.physics-profile-grid {display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px;margin-top:22px;}
+.physics-summary .lab-card,.physics-curve {padding:23px;}
+.physics-summary h2 {font-size:21px;}
+.physics-summary strong {display:block;font-size:29px;color:#b9e3e7;font-weight:500;margin:16px 0;}
+.physics-summary strong small {font-size:15px;color:#b4c7d8;}
+.physics-summary p {line-height:1.85;}
+.physics-curve {background:#101c2c;border:1px solid #2b3d51;border-radius:10px;}
+.physics-curve strong {font-size:17px;font-weight:500;}
+.physics-curve svg {display:block;width:100%;margin-top:12px;}
+.physics-curve text {font-size:12px;}
+@media(max-width:1150px){.physics-layout{grid-template-columns:minmax(0,1fr) 310px;}.physics-summary{grid-template-columns:1fr;}.physics-canvas{height:480px;}}
+@media(max-width:900px){.physics-layout,.physics-profile-grid{grid-template-columns:1fr;}.physics-heading h2{font-size:23px;}.physics-canvas{height:420px;min-height:380px;}}
+.physics-layout .formula {font-family:inherit;font-size:21px;font-style:normal;line-height:1.6;}
+.physics-layout {align-items:start;}
+.physics-canvas {height:480px;min-height:400px;flex:none;}
+.physics-heading {margin:0 0 14px;}
+.physics-heading h2 {margin:0 0 7px;font-size:26px;}
+.physics-heading p {margin:0;}
+@media(max-width:900px){.physics-canvas{height:400px;min-height:360px;}}

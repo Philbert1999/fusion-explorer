@@ -1,6 +1,7 @@
+import SceneLabel from "./SceneLabel";
 import { useEffect, useMemo, useState } from "react";
 import { Canvas, useThree } from "@react-three/fiber";
-import { Html, Line, OrbitControls } from "@react-three/drei";
+import {  Line, OrbitControls } from "@react-three/drei";
 import { Vector3 } from "three";
 import PlaybackDuration from "./PlaybackDuration";
 import { circle, frcContour, mirrorCondition, mirrorField, mirrorParticle, pulseFrame, type ConfinementKind, type Vec } from "./confinement";
@@ -95,10 +96,10 @@ function Mirror({ seconds, ratio, pitch, coils }: { seconds: number; ratio: numb
     <Line points={trail} color={trapped ? gold : coral} lineWidth={3} />
     <Dot position={position} color={trapped ? gold : coral} />
     <Arrow from={[-1, 1.7, 0]} to={[1, 1.7, 0]} />
-    <Html center position={[0, 1.8, 0]}><span className="confinement-label">磁场 B 沿管道 →</span></Html>
-    <Html center position={[-3, -1.4, 0]}><span className="confinement-label">强磁场 · 瓶口</span></Html>
-    <Html center position={[3, -1.4, 0]}><span className="confinement-label">强磁场 · 瓶口</span></Html>
-    <Html center position={[0, -1.6, 0]}><span className="confinement-label">中间磁场较弱</span></Html>
+    <SceneLabel center position={[0, 1.8, 0]}><span className="confinement-label">磁场 B 沿管道 →</span></SceneLabel>
+    <SceneLabel center position={[-3, -1.4, 0]}><span className="confinement-label">强磁场 · 瓶口</span></SceneLabel>
+    <SceneLabel center position={[3, -1.4, 0]}><span className="confinement-label">强磁场 · 瓶口</span></SceneLabel>
+    <SceneLabel center position={[0, -1.6, 0]}><span className="confinement-label">中间磁场较弱</span></SceneLabel>
   </>;
 }
 function FRC({ seconds, coils }: { seconds: number; coils: boolean }) {
@@ -116,8 +117,8 @@ function FRC({ seconds, coils }: { seconds: number; coils: boolean }) {
     <Arrow from={[0.7, 0, 0]} to={[-0.7, 0, 0]} color={coral} />
     <Arrow from={[-1, 2, 0]} to={[1, 2, 0]} />
     <Line points={circle(0, Math.SQRT1_2)} color={gold} dashed dashSize={0.08} gapSize={0.06} />
-    <Html center position={[0, 1.9, 0]}><span className="confinement-label">外侧磁场 →</span></Html>
-    <Html center position={[0, -1.65, 0]}><span className="confinement-label">核心磁场 ← · 方向反转</span></Html>
+    <SceneLabel center position={[0, 1.9, 0]}><span className="confinement-label">外侧磁场 →</span></SceneLabel>
+    <SceneLabel center position={[0, -1.65, 0]}><span className="confinement-label">核心磁场 ← · 方向反转</span></SceneLabel>
   </>;
 }
 function RingArrow({ x, radius, reverse = false, color }: { x: number; radius: number; reverse?: boolean; color: string }) {
@@ -158,7 +159,7 @@ function Inertial({ seconds, indirect }: { seconds: number; indirect: boolean })
     <mesh scale={f.radius * 0.72}><sphereGeometry args={[1, 48, 32]} /><meshStandardMaterial color={f.burning ? "#fff1cd" : cyan} emissive={f.burning ? "#ffb876" : "#267d91"} emissiveIntensity={f.burning ? 2 : 0.4} /></mesh>
     {f.phase > 0.16 && f.phase < 0.55 && beamDirections.slice(0, 6).map((v, i) => <Arrow key={i} from={v.map(n => n * (f.radius + 0.22)) as Vec} to={v.map(n => n * (f.radius + 0.85)) as Vec} color={coral} />)}
     {f.burning && beamDirections.slice(0, 6).map((v, i) => <Dot key={i} position={v.map(n => n * (0.7 + (f.phase - 0.55) * 12)) as Vec} color={gold} />)}
-    <Html center position={[0, -2.6, 0]}><span className="confinement-label">{indirect ? "激光 → 腔壁 → X 射线 → 燃料球" : "激光 → 燃料球外层 → 向内压缩"}</span></Html>
+    <SceneLabel center position={[0, -2.6, 0]}><span className="confinement-label">{indirect ? "激光 → 腔壁 → X 射线 → 燃料球" : "激光 → 燃料球外层 → 向内压缩"}</span></SceneLabel>
   </>;
 }
 

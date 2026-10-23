@@ -4,9 +4,9 @@ Vibe-coded by Chang Huayi with Codex
 
 从原子核相遇开始，在浏览器中探索核聚变和等离子体：磁镜、FRC、Z/θ箍缩、惯性约束聚变、托卡马克与仿星器，以及磁力线、粒子轨道、漂移、不稳定性和输运。面向初学者的交互式三维教学工作台。
 
-**[在线体验核聚变探索者](https://tokamak-explorer.surebell1025.chatgpt.site)** · 公开访问，链接可直接分享。
+**[在线体验核聚变探索者](https://fusion-explorer.surebell1025.chatgpt.site)** · 公开访问，链接可直接分享。
 
-项目原名 Tokamak Explorer，现已扩展为涵盖多种聚变路线的 Fusion Explorer。现有仓库地址与分享网址继续有效。
+项目原名 Tokamak Explorer，现已扩展为涵盖多种聚变路线的 Fusion Explorer。公开网页地址已改为 fusion-explorer。
 
 使用 React、TypeScript、Vite、Three.js、React Three Fiber、Drei、Tailwind CSS 和 Vitest。所有计算在本地浏览器运行，无需后端或付费 API。
 
@@ -31,7 +31,7 @@ pnpm build
 
 构建结果位于 `dist/`，可部署到静态网站托管服务。也可使用 npm 安装依赖并执行同名脚本；仓库维护的是 `pnpm-lock.yaml`。
 
-## 十二个探索页面
+## 十三个探索页面
 
 | 页面 | 可以观察什么 |
 | --- | --- |
@@ -44,6 +44,7 @@ pnpm build
 | 仿星器原理 | 三维主线圈显隐与透明度、扭转曲面、可选切片及同步截面图；与第一页一致的操作方式 |
 | 两种装置的区别 | 大电流与外部线圈的不同作用，通行/被俘获粒子直觉，位形与人为参考漂移的并排示意 |
 | 装置尺寸对比 | 同一米制比例下比较28台装置；悬停三维模型显示名称，默认展开建造/使用时间、功率及来源 |
+| 进阶探索 | 一次放电、合成诊断、电场与电流、加热与电流驱动、磁平衡与剖面、刮削层与偏滤器 |
 | 粒子轨道 | 数值导引中心积分生成通行/香蕉轨道，同步 R–Z、平行速度与守恒误差 |
 | 漂移机制 | ∇B、曲率及 E×B 漂移，场方向、真实位移与可旋转空间示意 |
 | 托卡马克中的不稳定性与输运 | 宏观/微观例子、分类、简要原理及外部推导链接 |
@@ -60,6 +61,7 @@ pnpm build
 | --- | --- | --- |
 | 磁力线 | 1–100 示意秒，对应同数环向圈 | 1 圈/播放秒；不代表粒子真实飞行时间 |
 | 漂移机制 | 1–120 μs | 8/6 μs/播放秒 |
+| 进阶探索 | 一次放电、合成诊断、电场与电流、加热与电流驱动、磁平衡与剖面、刮削层与偏滤器 |
 | 粒子轨道 | 10–250 μs，实际积分区间 | 30 μs/播放秒 |
 | 两种装置的区别 | 0.5–4 T | 1 T/6 播放秒 |
 | 不稳定性与输运 | 0.5–4 T | 1 T/10 播放秒 |
@@ -149,7 +151,7 @@ x = R cos φ, y = R sin φ, z = Z
 
 ## 在线发布与后续修改
 
-Sites入口：https://tokamak-explorer.surebell1025.chatgpt.site 。已按所有者要求开放为公开访问，拿到链接即可浏览。网站与私有GitHub仓库独立，源码继续保存在 Philbert1999/tokamak-explorer；发布后仍可修改。修改后重新运行测试与构建，再发布同一个Sites项目即可更新网址，旧网址不变。托管标识保存在 `.openai/hosting.json`，不含凭据。
+Sites入口：https://fusion-explorer.surebell1025.chatgpt.site 。已按所有者要求开放为公开访问，拿到链接即可浏览。网站与私有GitHub仓库独立，源码继续保存在 Philbert1999/fusion-explorer；发布后仍可修改。修改后重新运行测试与构建，再发布同一个Sites项目即可更新内容。托管标识保存在 `.openai/hosting.json`，不含凭据。香港镜像计划使用阿里云OSS中国香港地域及核聚变相关自定义域名，尚未开通。
 
 ## 其他约束思路：三个问题
 
@@ -168,4 +170,46 @@ Sites入口：https://tokamak-explorer.surebell1025.chatgpt.site 。已按所有
 
 功率按资料口径标明加热子系统、加热总能力、聚变输出或电源额定值；同时标注设计目标、历史配置或示例放电。MW与kW自动换算。ITER的50 MW输入和500 MW目标聚变输出分别列出；J-TEXT的100 MW是脉冲发电机额定值；GOLEM的46.6 kW取自示例放电#2819。各条来源保存在src/deviceFacts.ts，避免将不同量都写成笼统的“功率”。
 
-全站十二页左上角统一显示作者署名：Vibe-coded by Chang Huayi with Codex。
+全站十三页左上角统一显示作者署名：Vibe-coded by Chang Huayi with Codex。
+
+## 艾可秀子目录托管
+
+执行 `npm run build:axureshow`，再上传 `dist` 文件夹（根层包含 index.html 与 assets）。Vite 使用相对资源路径；专用打包步骤将入口改为内联模块导入，避免平台给脚本 URL 添加版本参数后，与延迟加载分块引用形成两份 React。普通 `npm run build` 仍供其他静态托管使用。
+## 进阶探索：电场与电流（2026-10-23）
+
+最后一个标签新增“进阶探索 · 电场与电流”。三维环面区分电场 E、传统电流 J、电子平均定向运动和磁场 B，显示中央螺线管及其电流方向。环向感应电场模式使用 V_loop = −dΦ/dt、Eφ = V_loop/(2πR)、固定 σ∥ = 10⁶ S/m 的局部欧姆响应；径向电场模式展示电子和离子同向的 E×B 漂移，以及共同流动与净电流的区别。可反转磁通变化、径向 E 或环向 B，切换图层、视角，暂停、重播、定位及延长6–60演示秒。不是电流反转瞬态或自洽平衡计算。
+
+模型和方向测试位于 src/electric.ts 与 src/electric.test.ts，页面位于 src/ElectricLesson.tsx。进一步阅读：[ITER 中央螺线管](https://www.iter.org/fusion-glossary)、[UT Austin 电流与输运方程](https://farside.ph.utexas.edu/teaching/plasma/Plasma/node53.html)。
+## 进阶探索：一次放电与合成诊断（2026-10-23）
+
+末尾“进阶探索”现在有三个内部栏目：一次放电、诊断与合成诊断、电场与电流。
+
+- 一次放电：六阶段可跳转时间轴，三维等离子体与电流、中心密度、中心温度、辅助加热、热储能五条波形同步。每24示意秒一轮，延长至96秒会增加放电轮数和测量数据。
+- 诊断：三维干涉仪和R–Z密度图共用同一放电；移动观测弦，调节剖面尖锐度、有限束宽、采样间隔与噪声。对比同观测过程的合成视线积分和带噪离散信号，显示单位10²⁰ m⁻²，区别于局部密度10²⁰ m⁻³。
+- 多弦恢复：七条弦通过规定函数族拟合中心密度和尖锐度；真值与拟合在同一最近采样时刻比较。单弦明确不做唯一剖面恢复。数值积分与已知抛物线解析值、多弦无噪恢复、采样区间扩展均有测试。
+
+数据为教学规定波形，不是装置实测或自洽放电求解；复现输入与模型见src/experiment.ts，三维页面见src/AdvancedLesson.tsx。加热系统、磁平衡、偏滤器已在后续六栏目扩展中加入。参考：[ITER诊断](https://www.iter.org/machine/supporting-systems/diagnostics)、[IPP干涉仪实验讲义](https://www.ipp.mpg.de/2882460/anleitung.pdf)。
+
+本轮65项测试、TypeScript检查通过；本地构建与上传包随代码更新，浏览器视觉检查及线上发布状态另行确认。
+## 进阶探索六栏目与入口修复（2026-10-23）
+
+进阶探索新增三个以三维动态场景为主、旁配原理说明的栏目：
+
+- 加热与电流驱动：欧姆、NBI、EC、IC传能示意；中性原子直行、电离后的快离子偏转、波与回旋吸收，及对称加热/正反向电流驱动。简化能量模型满足 dW/dt=P_abs−W/τ，不把教学驱动系数作为装置效率预测。
+- 磁平衡与剖面：嵌套磁面、沿线亮点、可调κ/δ与选定半径；电流集中程度联动圆柱近似q剖面；显示压强、电流和q曲线及q=1.5/2/3参考位置。
+- 刮削层与偏滤器：带X点的解析磁通、闭合分界面、开放螺旋场线及内外靶板，热流标记沿线运动。可调SOL功率、辐射分流、足迹展宽及演化时长，统计靶板功率、平均热流与累计能量。
+
+三栏目均支持旋转、缩放、平移、视角复位、播放/暂停、重播、进度及6–96示意秒的演化时长。
+
+修复已在浏览器捕获的 Invalid shot：首帧RAF时间戳可能略早于performance.now()起点，原逻辑产生负时间。frameElapsed统一限制非负帧间隔，覆盖进阶放电、电场、电流、粒子轨道与新场景。另将独立DOM根的三维标注改为同一WebGL场景内的标注，解决切换时removeChild卸载竞争。
+
+新增模型：src/advancedPhysics.ts；页面：src/PhysicsLab.tsx；标注：src/SceneLabel.tsx。进一步阅读：[ITER加热系统](https://www.iter.org/machine/supporting-systems/external-heating-systems)、[IPP磁平衡](https://www.ipp.mpg.de/4119345/mhd)、[ITER偏滤器与分界面术语](https://www.iter.org/fusion-glossary)。
+
+验证：71项Vitest测试通过，TypeScript检查与生产构建通过。独立Chrome实际打开本地5174，测试四次进入进阶页、六栏目切换、四种加热方式、对称加热无定向驱动、延长演化时间和剖面/SOL参数调节；注入提前50ms的RAF时间戳回归首帧问题，无未捕获页面异常。保留1920×1080截图：screenshots/advanced-heating.png、advanced-equilibrium.png、advanced-divertor.png。
+
+本轮提供本地预览与艾可秀兼容上传包，未更新GitHub或公开网站，尚未验证手机实机与艾可秀新上传后的运行效果。
+## 偏滤器实体与本轮同步（2026-10-23）
+
+偏滤器采用银灰色分块靶板、深蓝色支撑底座和橙色热流足迹；支持整体与近景切换，保持播放进度。截图见 screenshots/divertor-hardware-overview.png 和 screenshots/divertor-hardware-closeup.png。
+
+本次同步包含进阶探索六栏目、入口与场景切换修复、首页继续阅读提示及艾可秀兼容打包脚本。发布前71项测试、TypeScript检查、生产构建通过；桌面浏览器已验证进阶导航与偏滤器视角。公开站点继续使用上方在线体验地址。
